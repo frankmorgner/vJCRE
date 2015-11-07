@@ -8,6 +8,7 @@ public class OwnerPIN implements PIN {
 
 	public OwnerPIN(byte tryLimit, byte maxPINSize) {
 		value = new byte[1+maxPINSize];
+		limit = tryLimit;
 	}
 	public byte getTriesRemaining() {
 		return remaining;
@@ -22,7 +23,7 @@ public class OwnerPIN implements PIN {
 		if (value[0] != length)
 			return false;
 
-		if (Util.arrayCompare(pin, (short) 0, value, (short) 1, length) == 0) {
+		if (Util.arrayCompare(pin, offset, value, (short) 1, length) == 0) {
 			setValidatedFlag(true);
 			remaining = (byte) (remaining + 1); // Restore
 			return true;
@@ -52,7 +53,7 @@ public class OwnerPIN implements PIN {
 		if (length > value.length + 1)
 			PINException.throwIt(PINException.ILLEGAL_VALUE);
 		value[0] = length;
-		Util.arrayCopy(pin, (short)0, value, (short)1, length);
+		Util.arrayCopy(pin, offset, value, (short)1, length);
 		setValidatedFlag(false);
 	}
 
