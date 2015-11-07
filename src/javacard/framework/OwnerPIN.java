@@ -40,7 +40,7 @@ public class OwnerPIN implements PIN {
 	}
 
 	protected void setValidatedFlag(boolean value) {
-		validated = false;
+		validated = value;
 	}
 
 	public void reset() {
