@@ -29,7 +29,7 @@ public class vKeyPair {
 				KeyPairGenerator keyGen;
 				keyGen = KeyPairGenerator.getInstance("RSA", VRE.provider);
 				vRSAPublicKey vpubk = (vRSAPublicKey) pub;
-				if (vpubk.publicExponent != BigInteger.ZERO) {
+				if (vpubk.publicExponent != BigInteger.ZERO && vpubk.publicExponent != null ) {
 					keyGen.initialize(new RSAKeyGenParameterSpec(vpubk.getSize(), vpubk.publicExponent));
 				} else {
 					keyGen.initialize(vpubk.getSize());
